@@ -1,0 +1,6 @@
+*generated.*
+coverage/
+cypress/**/*-examples/
+node_modules/
+out/
+src/pages/demos/

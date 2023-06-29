@@ -1,0 +1,15 @@
+{
+  "trailingComma": "all",
+  "semi": false,
+  "overrides": [
+    {
+      "files": [
+        "src/components/contentful/ContentfulSection.tsx",
+        "src/types/contentful/index.ts"
+      ],
+      "options": {
+        "printWidth": 200
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+import "next-env"
+import "src/types/global/jest/jest-google-maps-mock"
+import "src/types/global/jest/jest-next-dynamic"
+import "src/types/global/next/fonts"
+import "src/types/global/next/images"

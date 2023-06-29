@@ -1,0 +1,19 @@
+// This is an entry point that registers all available configurations. This file
+// is imported by next.config.js. All referenced configurations are therefore
+// available in any SASS file.
+@import "config/colors-variables";
+@import "config/colors-theme-1";
+@import "config/colors-theme-2";
+@import "config/borders";
+@import "config/color";
+@import "config/elevation";
+@import "config/icons";
+@import "config/layers";
+@import "config/screens";
+@import "config/spaces";
+@import "config/texts-variables";
+@import "config/texts-theme-1";
+@import "config/texts-theme-2";
+@import "config/texts";
+@import "config/timings";
+@import "/src/components/common/googleMaps/locationSearch/googleMaps";

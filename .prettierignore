@@ -1,0 +1,10 @@
+.next/
+**/*.scss
+coverage/
+*generated.*
+helm/
+node_modules/
+out/
+src/pages/components/
+temp/
+keycloak-pr/

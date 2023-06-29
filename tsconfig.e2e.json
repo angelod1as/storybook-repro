@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "target": "ES2015",
+    "lib": ["ES2015", "DOM"],
+    "types": ["cypress", "cypress-iframe"]
+  },
+  "include": ["cypress", "**/*.e2e.ts", "src/types/global/NodeJS.d.ts"]
+}

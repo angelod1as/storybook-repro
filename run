@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+set -e
+
+if [ -f ./.env ]; then
+  . ./.env
+  export NEXTAUTH_URL="$WEB_ORIGIN"
+else
+  echo "No .env file in project root."
+fi
+
+# https://nextjs.org/telemetry
+export NEXT_TELEMETRY_DISABLED=1
+
+# This is set here to avoid 2 env variables with the same value in `.env`.
+# https://next-auth.js.org/configuration/options#nextauth_url
+if [[ ! -z "$WEB_ORIGIN" ]]; then
+  export NEXTAUTH_URL="$WEB_ORIGIN"
+fi
+
+dev() {
+  yarn
+  yarn next dev "$@"
+}
+
+build() {
+  yarn next build "$@"
+}
+
+start() {
+  yarn next start "$@"
+}
+
+lint-tsc() {
+  yarn tsc --noEmit --project tsconfig.src.json "$@"
+  yarn tsc --noEmit --project tsconfig.test.json "$@"
+  yarn tsc --noEmit --project tsconfig.e2e.json "$@"
+}
+
+lint-prettier() {
+  yarn prettier . \
+    --check "$@"
+}
+
+lint-eslint() {
+  yarn eslint . \
+    --ext .js,.jsx,.ts,.tsx "$@"
+}
+
+lint-stylelint() {
+  yarn stylelint '**/*.scss' "$@"
+}
+
+lint() {
+  yarn
+  lint-tsc
+  lint-prettier
+  lint-eslint
+  lint-stylelint
+}
+
+fix-tsc() {
+  yarn tsc --noEmit --project tsconfig.src.json "$@"
+  yarn tsc --noEmit --project tsconfig.test.json "$@"
+  yarn tsc --noEmit --project tsconfig.e2e.json "$@"
+}
+
+fix-prettier() {
+  yarn prettier . \
+    --write "$@"
+}
+
+fix-eslint() {
+  yarn eslint . \
+    --fix --ext .js,.jsx,.ts,.tsx \
+    "$@"
+}
+
+fix-stylelint() {
+  yarn stylelint '**/*.scss' \
+    --fix \
+    "$@"
+}
+
+fix() {
+  fix-tsc
+  fix-prettier
+  fix-eslint
+  fix-stylelint
+}
+
+test() {
+  export TZ=UTC
+  yarn jest \
+    --coverage \
+    --verbose \
+    "$@"
+}
+
+e2e() {
+  yarn cypress open
+}
+
+e2e-ci() {
+  yarn cypress run \
+    --browser chrome "$@"
+}
+
+e2e-local() {
+  yarn cypress run \
+    --browser chrome "$@" \
+    --spec cypress/integration/!\(token\)/**/*.e2e.ts
+}
+
+#
+# This makes the above functions work as CLI commands.
+#
+if [ -n "$1" ] && type $1 | grep -i function > /dev/null; then
+  command="$1"
+  shift
+  $command "$@"
+else
+  echo "Unknown command: $1"
+  commands=$(compgen -A function | tr '\n' ' ')
+  echo "All commands:    $commands"
+  exit 1
+fi

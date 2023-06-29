@@ -1,0 +1,36 @@
+$selector: ".Tabs";
+
+#{$selector} {
+  display: flex;
+  padding: $space-xs;
+  background: color($--border-secondary);
+  border-radius: $radius;
+
+  &__item {
+    flex: 1;
+    border-right: 0.5px solid color($--border-primary);
+
+    &[data-state="on"] {
+      background: color($--background-base);
+      border-radius: 5px;
+      box-shadow: $elevation-sm;
+    }
+
+    &__label {
+      padding: $space-sm;
+      text-align: center;
+    }
+
+    &[data-state="on"] &__label {
+      @include text("button/xs");
+    }
+
+    &[data-state="off"] &__label {
+      @include text("meta");
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}

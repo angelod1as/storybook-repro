@@ -1,0 +1,6 @@
+{
+  "*.{js,jsx,ts,tsx}": ["prettier --write", "eslint --fix"],
+  "*.{json,md,yml}": ["prettier --write"],
+  "*.{css,sass,scss}": ["prettier --write", "stylelint --fix"],
+  "*.svg": ["svgo --config ./svgo.config.js"]
+}
