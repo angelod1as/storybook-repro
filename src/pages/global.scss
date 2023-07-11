@@ -1,0 +1,103 @@
+@import "node-reset-scss/scss/reset";
+@import "src/styles/designsystem/mixins";
+@import "src/styles/designsystem/config";
+@import "src/styles/ui/mixins";
+
+/* stylelint-disable selector-max-id, selector-id-pattern */
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* stylelint-enable selector-max-id, selector-id-pattern */
+
+:root.theme-1 {
+  @include spread-map($theme-map-colors-theme-1);
+  @include spread-map($theme-map-texts-theme-1);
+}
+
+:root.theme-2 {
+  @include spread-map($theme-map-colors-theme-2);
+  @include spread-map($theme-map-texts-theme-2);
+}
+
+html,
+body {
+  @include text("base");
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* Prevent iOS font scaling in landscape: */
+  color: color($--text-base);
+  line-height: 1.15;
+  background: color($--background-base);
+  -moz-osx-font-smoothing: grayscale;
+  /* Allow better font smoothing: */
+  -webkit-font-smoothing: antialiased;
+  /* Allow better font smoothing: */
+  text-size-adjust: none;
+}
+
+html {
+  overflow-y: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  @include border(0);
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+  -webkit-touch-callout: none;
+}
+
+a,
+button {
+  @include when-focused() {
+    @include use-focusring();
+  }
+}
+
+a,
+button,
+input,
+textarea,
+select,
+label {
+  // remove default tap highlights
+  -webkit-tap-highlight-color: transparent;
+}
+
+input {
+  margin: 0; // remove 2px default margin on iOS
+}
+
+input[type="password"],
+input[name="password"] {
+  // name="password" for inputs that have a reveal button
+  font-family: monospace;
+}
+
+html[data-whatintent="mouse"] *:focus,
+html[data-whatintent="keyboard"] *:focus,
+html[data-whatintent="touch"] *:focus {
+  outline: none;
+}
