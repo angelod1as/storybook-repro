@@ -1,3 +1,7 @@
+@import "src/styles/designsystem/mixins";
+@import "src/styles/designsystem/config";
+@import "src/styles/ui/mixins";
+
 $selector: ".Tabs";
 
 #{$selector} {
